@@ -974,8 +974,8 @@ function calculateTemperatures() {
 
   const tEq = +temperatureEquatorInput.value;
   const tPole = +temperaturePoleInput.value;
-  const tDelta = (1.5)tEq - tPole;
-  const int = d3.easePolyInOut.exponent(0.5); // interpolation function
+  const tDelta = tEq - tPole;
+  const int = d3.easePolyInOut.exponent(0.35); // interpolation function
 
   d3.range(0, cells.i.length, grid.cellsX).forEach(function (r) {
     const y = grid.points[r][1];
