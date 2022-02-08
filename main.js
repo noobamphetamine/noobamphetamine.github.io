@@ -986,12 +986,12 @@ function calculateTemperatures() {
     }
   });
 
-  // temperature decreases by 6.5 degree C per 1km
+  // temperature decreases by 6 degree C per 1km
   function convertToFriendly(h) {
     if (h < 20) return 0;
     const exponent = +heightExponentInput.value;
     const height = Math.pow(h - 18, exponent);
-    return rn((height / 1000) * 6.5);
+    return rn((height / 1000) * 6);
   }
 
   TIME && console.timeEnd("calculateTemperatures");
@@ -1022,7 +1022,7 @@ function generatePrecipitation() {
   // x2 = 60-70 latitude: wet summer (rising zone), dry winter (sinking zone)
   // x1 = 70-85 latitude: dry all year (sinking zone)
   // x0.5 = 85-90 latitude: dry all year (sinking zone)
-  const latitudeModifier = [4, 2, 2, 2, 1, 1, 2, 2, 2, 2, 3, 3, 2, 2, 1, 1, 1, 0.5];
+  const latitudeModifier = [6, 5, 4, 2, 1, 1, 2, 3, 4, 4, 5, 6, 5, 3, 2, 1, 0.5, 0.5];
   const MAX_PASSABLE_ELEVATION = 85;
 
   // define wind directions based on cells latitude and prevailing winds there
