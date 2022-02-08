@@ -1023,7 +1023,7 @@ function generatePrecipitation() {
   // x1 = 70-85 latitude: dry all year (sinking zone)
   // x0.5 = 85-90 latitude: dry all year (sinking zone)
   const latitudeModifier = [6, 5, 4, 2, 1, 1, 2, 3, 4, 4, 5, 6, 5, 3, 2, 1, 0.5, 0.5];
-  const MAX_PASSABLE_ELEVATION = 85;
+  const MAX_PASSABLE_ELEVATION = 65;
 
   // define wind directions based on cells latitude and prevailing winds there
   d3.range(0, cells.i.length, cellsX).forEach(function (c, i) {
