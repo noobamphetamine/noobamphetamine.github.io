@@ -1441,7 +1441,7 @@ function defineBiomes() {
   }
 
   function calculateMoisture(i) {
-    let moist = prec[cells.g[i]];
+    let moist = prec*latMod[cells.g[i]];
     if (cells.r[i]) moist += Math.max(cells.fl[i] / 20, 2);
 
     const n = cells.c[i]
