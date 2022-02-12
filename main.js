@@ -982,7 +982,7 @@ function calculateTemperatures() {
     const lat = Math.abs(mapCoordinates.latN - (y / graphHeight) * mapCoordinates.latT); // [0; 90]
     const initTemp = (1.25*tEq) - int(lat / 90) * tDelta;
     for (let i = r; i < r + grid.cellsX; i++) {
-      cells.temp[i] = minmax(initTemp - convertToFriendly(cells.h[i]), -128, 127);
+      cells.temp[i] = minmax(4 + initTemp - convertToFriendly(cells.h[i]), -128, 127);
     }
   });
 
