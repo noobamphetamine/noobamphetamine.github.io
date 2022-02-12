@@ -1461,7 +1461,7 @@ function getBiomeId(moisture, temperature, height) {
   if (isWetLand(moisture, temperature, height)) return 12; // wetland biome
 
   const moistureBand = Math.min((moisture / 5) | 0, 4); // [0-4]
-  const temperatureBand = Math.min(Math.max(24 - temperature, 0), 25); // [0-25]
+  const temperatureBand = Math.min(Math.max(20 - temperature, 0), 25); // [0-25]
   return biomesData.biomesMartix[moistureBand][temperatureBand];
 }
 
