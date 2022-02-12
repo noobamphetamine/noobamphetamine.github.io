@@ -1434,7 +1434,7 @@ function defineBiomes() {
   cells.biome = new Uint8Array(cells.i.length); // biomes array
 
   for (const i of cells.i) {
-    const temperature = temp[cells.g[i]];
+    const temperature = 4 + temp[cells.g[i]];
     const height = cells.h[i];
     const moisture = height < 20 ? 0 : calculateMoisture(i);
     cells.biome[i] = getBiomeId(moisture, temperature, height);
