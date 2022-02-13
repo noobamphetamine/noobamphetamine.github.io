@@ -373,45 +373,111 @@ function findBurgForMFCG(params) {
 function applyDefaultBiomesSystem() {
   const name = [
     "Marine",
-    "Hot desert",
-    "Cold desert",
-    "Savanna",
-    "Grassland",
-    "Tropical seasonal forest",
-    "Temperate deciduous forest",
-    "Tropical rainforest",
-    "Temperate rainforest",
-    "Taiga",
-    "Tundra",
+    "Polar desert", 
+    "Subpolar dry tundra",
+    "Subpolar moist tundra", 
+    "Subpolar wet tundra",
+    "Subpolar rain tundra",
+    "Boreal desert", 
+    "Boreal dry scrub",
+    "Boreal moist forest", 
+    "Boreal wet forest",
+    "Boreal rain forest",
+    "Cool temperate desert",
+    "Cool temperate desert scrub",
+    "Cool temperate steppe",
+    "Cool temperate moist forest",
+    "Cool temperate wet forest",
+    "Cool temperate rain forest",
+    "Warm temperate desert",
+    "Warm temperate desert scrub",
+    "Warm temperate thorn scrub",
+    "Warm temperate dry forest",
+    "Warm temperate moist forest",
+    "Warm temperate wet forest",
+    "Warm temperate rain forest",
+    "Subtropical desert",
+    "Subtropical desert scrub",
+    "Subtropical thorn woodland",
+    "Subtropical dry forest",
+    "Subtropical moist forest",
+    "Subtropical wet forest", 
+    "Subtropical rain forest",
+    "Tropical desert",
+    "Tropical desert scrub",
+    "Tropical thorn woodland",
+    "Tropical very dry forest",
+    "Tropical dry forest",
+    "Tropical moist forest",
+    "Tropical wet forest",
+    "Tropical rain forest",
     "Glacier",
     "Wetland"
   ];
-  const color = ["#466eab", "#fbe79f", "#b5b887", "#d2d082", "#c8d68f", "#b6d95d", "#29bc56", "#7dcb35", "#409c43", "#4b6b32", "#96784b", "#d5e7eb", "#0b9131"];
-  const habitability = [0, 4, 10, 22, 30, 50, 100, 80, 90, 12, 4, 0, 12];
-  const iconsDensity = [0, 3, 2, 120, 120, 120, 120, 150, 150, 100, 5, 0, 150];
+  const color = ["#466eab", "#ffffe6", "#dfbf9f", "#d4b996", "#cab48e", "#c3b088", "#ffff99",
+                 "#d2a679", "#b3ff1a", "#4dff4d", "#00ff00", "#ffff66", "#e6ff66", "#ffcc33", 
+                 "#99e600", "#1aff1a", "#00cc00", "#ffff33", "#ebff52", "#ffbf00", "#a3ad5c",
+                 "#77b300", "#00e600", "#009900", "#ffff33", "#f0ff3d", "#a39900", "#a8b857", 
+                 "#558000", "#00b300", "#006600", "#ffff00", "#f5ff29", "#999900", "#9ea361", 
+                 "#adc252", "#334d00", "#008000", "#003300", "#d5e7eb","#0b9131"];
+  const habitability = [0, 4, 5, 9, 10, 13, 7, 25, 49, 57, 62, 13, 16, 41, 82, 87, 99, 13, 16, 42, 83, 88, 100, 95, 12, 15, 39, 79, 83, 95, 90, 12, 15, 38, 77, 82, 94, 88, 83, 2, 12];
+  const iconsDensity = [0, 1, 3, 4, 5, 6, 2, 10, 100, 110, 120, 3, 5, 11, 110, 120 130, 4, 6, 15, 115, 125, 135, 145, 5, 7, 20, 120, 130, 140, 150, 4, 6, 60, 130, 140, 150, 150, 150, 0, 150];
   const icons = [
     {},
-    {dune: 3, cactus: 6, deadTree: 1},
     {dune: 9, deadTree: 1},
-    {acacia: 1, grass: 9},
     {grass: 1},
-    {acacia: 8, palm: 1},
-    {deciduous: 1},
-    {acacia: 5, palm: 3, deciduous: 1, swamp: 1},
-    {deciduous: 6, swamp: 1},
+    {grass: 1},
+    {grass: 1},
+    {grass: 1},
+    {dune: 9, deadTree: 1},
+    {dune: 9, deadTree: 1},
     {conifer: 1},
+    {conifer: 1},
+    {conifer: 1},
+    {dune: 9, deadTree: 1},
+    {dune: 9, deadTree: 1},
     {grass: 1},
+    {deciduous: 1},
+    {deciduous: 6, swamp: 1},
+    {deciduous: 6, swamp: 1},
+    {dune: 3, cactus: 6, deadTree: 1},
+    {dune: 3, cactus: 6, deadTree: 1},
+    {acacia: 1, grass: 9},
+    {deciduous: 1},
+    {deciduous: 6, swamp: 1},
+    {deciduous: 6, swamp: 1},
+    {deciduous: 6, swamp: 1},
+    {dune: 3, cactus: 6, deadTree: 1},
+    {dune: 3, cactus: 6, deadTree: 1},
+    {acacia: 1, grass: 9},
+    {acacia: 8, palm: 1},
+    {acacia: 8, palm: 1},
+    {acacia: 5, palm: 3, deciduous: 1, swamp: 1},
+    {acacia: 5, palm: 3, deciduous: 1, swamp: 1},
+    {dune: 3, cactus: 6, deadTree: 1},
+    {dune: 3, cactus: 6, deadTree: 1},
+    {acacia: 1, grass: 9},
+    {acacia: 8, palm: 1},
+    {acacia: 8, palm: 1},
+    {acacia: 8, palm: 1},
+    {acacia: 5, palm: 3, deciduous: 1, swamp: 1},
+    {acacia: 5, palm: 3, deciduous: 1, swamp: 1},
     {},
     {swamp: 1}
   ];
-  const cost = [10, 200, 150, 60, 50, 70, 70, 80, 90, 200, 1000, 5000, 150]; // biome movement cost
+  const cost = [10, 198, 245, 219, 193, 193, 149, 25, 77, 67, 67, 132, 121, 19, 56, 56, 63, 143, 132, 21, 63, 63, 70, 77, 154, 143, 81, 70, 70, 77, 84, 176, 165, 95, 84, 84, 91, 98, 105, 5000, 150]; // biome movement cost
   const biomesMartix = [
     // hot ↔ cold [>19°C; <-4°C]; dry ↕ wet
-    new Uint8Array([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 10]),
-    new Uint8Array([3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 10, 10, 10]),
-    new Uint8Array([5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 9, 10, 10, 10]),
-    new Uint8Array([5, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 10]),
-    new Uint8Array([7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 10, 10])
+    new Uint8Array([33, 33, 33, 26, 26, 26, 19, 19, 19, 19, 13, 13, 13, 13, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1]),
+    new Uint8Array([33, 33, 33, 26, 26, 26, 19, 19, 19, 19, 13, 13, 13, 13, 6, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1]),
+    new Uint8Array([34, 34, 34, 34, 27, 27, 27, 20, 20, 20, 14, 14, 14, 7, 7, 7, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1]),
+    new Uint8Array([35, 35, 35, 35, 35, 28, 28, 28, 21, 21, 21, 15, 15, 15, 8, 8, 8, 4, 4, 4, 1, 1, 1, 1, 1, 1]),
+    new Uint8Array([36, 36, 36, 36, 29, 29, 29, 29, 22, 22, 22, 16, 16, 16, 9, 9, 9, 5, 5, 5, 2, 1, 1, 1, 1, 1]),
+    new Uint8Array([37, 37, 37, 37, 30, 30, 30, 30, 23, 23, 23, 23, 17, 17, 17, 17, 10, 10, 10, 10, 2, 1, 1, 1, 1, 1]),
+    new Uint8Array([38, 38, 38, 38, 38, 31, 31, 31, 31, 24, 24, 24, 19, 18, 18, 18, 18, 10, 10, 10, 3, 1, 1, 1, 1, 1]),
+    new Uint8Array([39, 39, 39, 39, 39, 32, 32, 32, 32, 25, 25, 25, 19, 18, 18, 18, 18, 10, 10, 10, 3, 1, 1, 1, 1, 1]),
+    new Uint8Array([40, 40, 40, 40, 40, 32, 32, 32, 32, 25, 25, 25, 19, 18, 18, 18, 18, 10, 10, 10, 5, 1, 1, 1, 1, 1]),
+    new Uint8Array([40, 40, 40, 40, 40, 32, 32, 32, 32, 25, 25, 25, 19, 18, 18, 18, 18, 10, 10, 10, 5, 1, 1, 1, 1, 1])
   ];
 
   // parse icons weighted array into a simple array
@@ -1460,7 +1526,7 @@ function getBiomeId(moisture, temperature, height) {
   if (temperature < -5) return 11; // permafrost biome
   if (isWetLand(moisture, temperature, height)) return 12; // wetland biome
 
-  const moistureBand = Math.min((moisture / 5) | 0, 4); // [0-4]
+  const moistureBand = Math.min((moisture / 10) | 0, 9); // [0-9]
   const temperatureBand = Math.min(Math.max(20 - temperature, 0), 25); // [0-25]
   return biomesData.biomesMartix[moistureBand][temperatureBand];
 }
