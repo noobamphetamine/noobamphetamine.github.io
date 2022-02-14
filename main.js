@@ -416,7 +416,7 @@ function applyDefaultBiomesSystem() {
   ];
   const color = ["#466eab", "#ffffe6", "#dfbf9f", "#d4b996", "#cab48e", "#c3b088", "#ffff99",
                  "#d2a679", "#b3ff1a", "#4dff4d", "#00ff00", "#d5e7eb", "#0b9131", "#ffff66",
-                 "#e6ff66", "#ffcc33", "#99e600", "#1aff1a", "#00cc00", "#ffff33", "#ebff52",
+                 "#e6ff66", "#ffcc33", "#99e600", "#1aff1a", "#00cc00", "#ffff5c", "#ebff52",
                  "#ffbf00", "#a3ad5c", "#77b300", "#00e600", "#009900", "#ffff33", "#f0ff3d",
                  "#a39900", "#a8b857", "#558000", "#00b300", "#006600", "#ffff00", "#f5ff29",
                  "#999900", "#9ea361", "#adc252", "#334d00", "#008000", "#003300"];
