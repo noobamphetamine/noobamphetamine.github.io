@@ -1086,7 +1086,7 @@ function generatePrecipitation() {
   // x2 = 60-70 latitude: wet summer (rising zone), dry winter (sinking zone)
   // x1 = 70-85 latitude: dry all year (sinking zone)
   // x0.5 = 85-90 latitude: dry all year (sinking zone)
-  const latitudeModifier = [5, 4, 3, 2, 1, 0.5, 1, 1, 2, 2, 3, 4, 3, 2, 2, 1, 0.5, 0.5];
+  const latitudeModifier = [5, 4, 3, 2, 1, 0.5, 0.5, 1, 2, 2, 3, 4, 3, 2, 2, 1, 0.5, 0.5];
   const MAX_PASSABLE_ELEVATION = 75;
 
   // define wind directions based on cells latitude and prevailing winds there
@@ -1521,13 +1521,13 @@ function defineBiomes() {
 // assign biome id to a cell
 function getBiomeId(moisture, temperature, height) {
 
-  const moistureBand = Math.min((moisture / 5) | 0, 4); // [0-4]
-  const temperatureBand = Math.min(Math.max(20 - temperature, 0), 25); // [0-25]
-  return biomesData.biomesMartix[moistureBand][temperatureBand];
-  
   if (height < 20) return 0; // marine biome: all water cells
   if (temperature < -5) return 11; // permafrost biome
   if (isWetLand(moisture, temperature, height)) return 12; // wetland biome
+  
+  const moistureBand = Math.min((moisture / 5) | 0, 4); // [0-4]
+  const temperatureBand = Math.min(Math.max(20 - temperature, 0), 25); // [0-25]
+  return biomesData.biomesMartix[moistureBand][temperatureBand];
 }
 
 // assess cells suitability to calculate population and rand cells for culture center and burgs placement
