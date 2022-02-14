@@ -383,6 +383,8 @@ function applyDefaultBiomesSystem() {
     "Boreal moist forest", 
     "Boreal wet forest",
     "Boreal rain forest",
+    "Glacier",
+    "Wetland",
     "Cool temperate desert",
     "Cool temperate desert scrub",
     "Cool temperate steppe",
@@ -410,9 +412,7 @@ function applyDefaultBiomesSystem() {
     "Tropical dry forest",
     "Tropical moist forest",
     "Tropical wet forest",
-    "Tropical rain forest",
-    "Glacier",
-    "Wetland"
+    "Tropical rain forest"
   ];
   const color = ["#466eab", "#ffffe6", "#dfbf9f", "#d4b996", "#cab48e", "#c3b088", "#ffff99",
                  "#d2a679", "#b3ff1a", "#4dff4d", "#00ff00", "#ffff66", "#e6ff66", "#ffcc33", 
