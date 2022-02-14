@@ -1049,9 +1049,9 @@ function calculateTemperatures() {
   d3.range(0, cells.i.length, grid.cellsX).forEach(function (r) {
     const y = grid.points[r][1];
     const lat = Math.abs(mapCoordinates.latN - (y / graphHeight) * mapCoordinates.latT); // [0; 90]
-    const initTemp = (1.25*tEq) - int(lat / 90) * tDelta;
+    const initTemp = (tEq) - int(lat / 90) * tDelta;
     for (let i = r; i < r + grid.cellsX; i++) {
-      cells.temp[i] = minmax(1 + initTemp - convertToFriendly(cells.h[i]), -128, 127);
+      cells.temp[i] = minmax(initTemp - convertToFriendly(cells.h[i]), -128, 127);
     }
   });
 
@@ -1091,8 +1091,8 @@ function generatePrecipitation() {
   // x2 = 60-70 latitude: wet summer (rising zone), dry winter (sinking zone)
   // x1 = 70-85 latitude: dry all year (sinking zone)
   // x0.5 = 85-90 latitude: dry all year (sinking zone)
-  const latitudeModifier = [6, 5, 4, 2, 1, 1, 2, 3, 4, 4, 5, 5, 4, 3, 2, 2, 1, 1];
-  const MAX_PASSABLE_ELEVATION = 65;
+  const latitudeModifier = [4, 4, 3, 2, 1, 0.5, 1, 1, 2, 2, 3, 3, 3, 2, 2, 1, 0.5, 0.5];
+  const MAX_PASSABLE_ELEVATION = 75;
 
   // define wind directions based on cells latitude and prevailing winds there
   d3.range(0, cells.i.length, cellsX).forEach(function (c, i) {
