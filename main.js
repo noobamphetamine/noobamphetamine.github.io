@@ -471,16 +471,11 @@ function applyDefaultBiomesSystem() {
                 19, 56, 56, 63, 143, 132, 21, 63, 63, 70, 77, 154, 143, 81, 70, 70, 77, 84, 176, 165, 95, 84, 84, 91, 98, 105, 5000, 150]; // biome movement cost
   const biomesMartix = [
     // hot ↔ cold [>19°C; <-4°C]; dry ↕ wet
-    new Uint8Array([33, 33, 33, 26, 26, 26, 26, 19, 19, 19, 13, 13, 13, 6, 6, 6, 6, 2, 2, 2, 2, 1, 1, 1, 1, 1]),
-    new Uint8Array([34, 34, 33, 27, 27, 26, 26, 20, 19, 19, 14, 13, 13, 6, 6, 6, 6, 2, 2, 2, 2, 1, 1, 1, 1, 1]),
-    new Uint8Array([35, 34, 34, 27, 27, 27, 27, 20, 20, 20, 14, 14, 14, 7, 7, 7, 7, 3, 3, 2, 2, 1, 1, 1, 1, 1]),
-    new Uint8Array([35, 35, 35, 28, 28, 28, 28, 21, 21, 21, 15, 15, 14, 7, 7, 7, 7, 3, 3, 3, 3, 1, 1, 1, 1, 1]),
-    new Uint8Array([36, 36, 36, 29, 29, 29, 28, 22, 22, 21, 15, 15, 15, 8, 8, 8, 8, 3, 3, 3, 3, 1, 1, 1, 1, 1]),
-    new Uint8Array([37, 37, 37, 30, 29, 29, 29, 23, 22, 22, 16, 16, 16, 8, 8, 8, 8, 4, 4, 4, 4, 1, 1, 1, 1, 1]),
-    new Uint8Array([38, 38, 38, 30, 30, 30, 30, 23, 23, 23, 17, 16, 16, 9, 9, 9, 9, 4, 4, 4, 4, 1, 1, 1, 1, 1]),
-    new Uint8Array([39, 39, 38, 31, 31, 31, 31, 24, 24, 24, 17, 17, 17, 9, 9, 9, 9, 5, 5, 4, 4, 1, 1, 1, 1, 1]),
-    new Uint8Array([40, 39, 39, 32, 32, 31, 31, 25, 25, 24, 18, 18, 17, 10, 10, 10, 10, 5, 5, 5, 5, 1, 1, 1, 1, 1]),
-    new Uint8Array([40, 40, 40, 32, 32, 32, 32, 25, 25, 25, 18, 18, 18, 10, 10, 10, 10, 5, 5, 5, 5, 1, 1, 1, 1, 1])
+    new Uint8Array([33, 33, 33, 33, 26, 26, 26, 26, 19, 19, 19, 14, 13, 13, 6, 6, 6, 6 ,2, 2, 2, 2, 1, 1, 1, 1]),
+    new Uint8Array([34, 34, 35, 35, 28, 27, 27, 27, 21, 20, 20, 15, 14, 14, 7, 7, 7, 7, 3, 3, 3, 2, 1, 1, 1, 1]),
+    new Uint8Array([36, 36, 37, 37, 30, 29, 29, 28, 22, 22, 21, 16, 16, 15, 8, 8, 8, 8, 4, 4, 3, 3, 1, 1, 1, 1]),
+    new Uint8Array([39, 39, 38, 38, 31, 31, 30, 30, 24, 23, 23, 17, 17, 16, 9, 9, 9, 9, 5, 4, 4, 4, 1, 1, 1, 1]),
+    new Uint8Array([40, 40, 40, 39, 32, 32, 32, 31, 25, 25, 24, 18, 18, 18, 10, 10, 10, 10, 5, 5, 5, 5, 1, 1, 1, 1]),
   ];
 
   // parse icons weighted array into a simple array
@@ -1049,7 +1044,7 @@ function calculateTemperatures() {
   d3.range(0, cells.i.length, grid.cellsX).forEach(function (r) {
     const y = grid.points[r][1];
     const lat = Math.abs(mapCoordinates.latN - (y / graphHeight) * mapCoordinates.latT); // [0; 90]
-    const initTemp = (tEq) - int(lat / 90) * tDelta;
+    const initTemp = tEq - int(lat / 90) * tDelta;
     for (let i = r; i < r + grid.cellsX; i++) {
       cells.temp[i] = minmax(initTemp - convertToFriendly(cells.h[i]), -128, 127);
     }
@@ -1060,7 +1055,7 @@ function calculateTemperatures() {
     if (h < 20) return 0;
     const exponent = +heightExponentInput.value;
     const height = Math.pow(h - 18, exponent);
-    return rn((height / 1000) * 6);
+    return rn((height / 1000) * 6.5);
   }
 
   TIME && console.timeEnd("calculateTemperatures");
@@ -1091,7 +1086,7 @@ function generatePrecipitation() {
   // x2 = 60-70 latitude: wet summer (rising zone), dry winter (sinking zone)
   // x1 = 70-85 latitude: dry all year (sinking zone)
   // x0.5 = 85-90 latitude: dry all year (sinking zone)
-  const latitudeModifier = [4, 4, 3, 2, 1, 0.5, 1, 1, 2, 2, 3, 3, 3, 2, 2, 1, 0.5, 0.5];
+  const latitudeModifier = [5, 4, 3, 2, 1, 0.5, 1, 1, 2, 2, 3, 4, 3, 2, 2, 1, 0.5, 0.5];
   const MAX_PASSABLE_ELEVATION = 75;
 
   // define wind directions based on cells latitude and prevailing winds there
@@ -1525,13 +1520,14 @@ function defineBiomes() {
 
 // assign biome id to a cell
 function getBiomeId(moisture, temperature, height) {
+
+  const moistureBand = Math.min((moisture / 5) | 0, 4); // [0-4]
+  const temperatureBand = Math.min(Math.max(20 - temperature, 0), 25); // [0-25]
+  return biomesData.biomesMartix[moistureBand][temperatureBand];
+  
   if (height < 20) return 0; // marine biome: all water cells
   if (temperature < -5) return 11; // permafrost biome
   if (isWetLand(moisture, temperature, height)) return 12; // wetland biome
-
-  const moistureBand = Math.min((moisture / 10) | 0, 9); // [0-9]
-  const temperatureBand = Math.min(Math.max(20 - temperature, 0), 25); // [0-25]
-  return biomesData.biomesMartix[moistureBand][temperatureBand];
 }
 
 // assess cells suitability to calculate population and rand cells for culture center and burgs placement
