@@ -1086,7 +1086,7 @@ function generatePrecipitation() {
   // x2 = 60-70 latitude: wet summer (rising zone), dry winter (sinking zone)
   // x1 = 70-85 latitude: dry all year (sinking zone)
   // x0.5 = 85-90 latitude: dry all year (sinking zone)
-  const latitudeModifier = [5, 4, 3, 2, 1, 0.5, 0.5, 1, 2, 2, 3, 4, 3, 2, 2, 1, 0.5, 0.5];
+  const latitudeModifier = [5, 4, 3, 2, 1, 0.5, 0.5, 1, 2, 2, 3, 4, 3, 2, 2, 1, 1, 0.5];
   const MAX_PASSABLE_ELEVATION = 75;
 
   // define wind directions based on cells latitude and prevailing winds there
