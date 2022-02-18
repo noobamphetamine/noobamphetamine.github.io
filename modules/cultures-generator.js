@@ -113,25 +113,28 @@ window.Cultures = (function () {
 
     // set culture type based on culture center position
     function defineCultureType(i) {
-      if (cells.h[i] < 70 && [1, 2, 4].includes(cells.biome[i])) return "Nomadic"; // high penalty in forest biomes and near coastline
-      if (cells.h[i] > 50) return "Highland"; // no penalty for hills and moutains, high for other elevations
+      if ((cells.biome[i]) == [18] && P(0.6)) || ((cells.biome[i])) == [17, 24] && P(0.4)) || ((cells.biome[i]) == [15, 16, 21, 22, 23] && P(0.2)) || ((cells.biome[i]) == [29, 30, 31, 32, 38] && P(0.1)) return "Elves"; // high penalty in forest biomes and near coastline
+      if ((cells.biome[i]) == [11, 13, 14, 19, 20, 26, 27, 33, 34] && P(0.5)) || ((cells.biome[i]) == [28, 35, 40] && P(0.35)) || ((cells.biome[i]) == [8, 9, 36, 37, 39] && P(0.1)) return "Gnomes"; // no penalty for hills and moutains, high for other elevations
       const f = pack.features[cells.f[cells.haven[i]]]; // opposite feature
-      if (f.type === "lake" && f.cells > 5) return "Lake"; // low water cross penalty and high for growth not along coastline
-      if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4)))
-        return "Naval"; // low water cross penalty and high for non-along-coastline growth
-      if (cells.r[i] && cells.fl[i] > 100) return "River"; // no River cross penalty, penalty for non-River growth
-      if (cells.t[i] > 2 && [3, 7, 8, 9, 10, 12].includes(cells.biome[i])) return "Hunting"; // high penalty in non-native biomes
-      return "Generic";
+      if (f.cells > 5 && P(.05)) return "Amphibians"; 
+      if (f.cells < 5 && P(.05)) return "Dry Reptiles";
+      if ((cells.h[i] > 45) && (cells.biome[i]) == [2, 3, 4, 5, 6, 7, 8, 9, 10] && P(0.7)) || ((cells.h[i] > 45) && (cells.biome[i]) == [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] && P(0.5)) return "Dwarves";
+      if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4))) || (cells.r[i] && cells.fl[i] > 100) && P(0.6)
+      return "Goblins"; 
+      if ((cells.biome[i]) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40] && P(0.3)) return "Orcs";
+      if P(0.05) return "Other";
+      return "Humans"; 
     }
 
     function defineCultureExpansionism(type) {
       let base = 1; // Generic
-      if (type === "Lake") base = 0.8;
-      else if (type === "Naval") base = 1.5;
-      else if (type === "River") base = 0.9;
-      else if (type === "Nomadic") base = 1.5;
-      else if (type === "Hunting") base = 0.7;
-      else if (type === "Highland") base = 1.2;
+      if (type === "Elves") base = 0.5;
+      else if (type === "Gnomes") base = 0.5;
+      else if (type === "Amphibians") base = 1;
+      else if (type === "Dry Reptiles") base = 1;
+      else if (type === "Dwarves") base = 0.7;
+      else if (type === "Goblins") base = 1.2;
+      else if (type === "Orcs") base = 1.1
       return rn(((Math.random() * powerInput.value) / 2 + 1) * base, 1);
     }
 
@@ -413,36 +416,33 @@ window.Cultures = (function () {
 
   function getBiomeCost(c, biome, type) {
     if (cells.biome[pack.cultures[c].center] === biome) return 10; // tiny penalty for native biome
-    if (type === "Hunting") return biomesData.cost[biome] * 5; // non-native biome penalty for hunters
-    if (type === "Nomadic" && biome > 4 && biome < 10) return biomesData.cost[biome] * 10; // forest biome penalty for nomads
+    if (type === "Elves") return biomesData.cost[biome] /3;
+    if (type === "Gnomes") return biomesData.cost[biome] /2;
     return biomesData.cost[biome] * 2; // general non-native biome penalty
   }
 
   function getHeightCost(i, h, type) {
     const f = pack.features[cells.f[i]],
       a = cells.area[i];
-    if (type === "Lake" && f.type === "lake") return 10; // no lake crossing penalty for Lake cultures
-    if (type === "Naval" && h < 20) return a * 2; // low sea/lake crossing penalty for Naval cultures
-    if (type === "Nomadic" && h < 20) return a * 50; // giant sea/lake crossing penalty for Nomads
+    if (type === "Goblins" && h < 20) return a * 2;
+    if (type === "Amphibians" && h < 20) return a * 2; 
     if (h < 20) return a * 6; // general sea/lake crossing penalty
-    if (type === "Highland" && h < 44) return 3000; // giant penalty for highlanders on lowlands
-    if (type === "Highland" && h < 62) return 200; // giant penalty for highlanders on lowhills
-    if (type === "Highland") return 0; // no penalty for highlanders on highlands
+    if (type === "Dwarves" && h < 40) return 150;
+    if (type === "Dwarves" && h < 30) return 500;
+    if (type === "Dwarves" && h > 40) return 20;
     if (h >= 67) return 200; // general mountains crossing penalty
     if (h >= 44) return 30; // general hills crossing penalty
     return 0;
   }
 
   function getRiverCost(r, i, type) {
-    if (type === "River") return r ? 0 : 100; // penalty for river cultures
+    if (type === "Amphibians") return 0;
+    if (type === "Goblins") return 0;
     if (!r) return 0; // no penalty for others if there is no river
     return minmax(cells.fl[i] / 10, 20, 100); // river penalty from 20 to 100 based on flux
   }
 
   function getTypeCost(t, type) {
-    if (t === 1) return type === "Naval" || type === "Lake" ? 0 : type === "Nomadic" ? 60 : 20; // penalty for coastline
-    if (t === 2) return type === "Naval" || type === "Nomadic" ? 30 : 0; // low penalty for land level 2 for Navals and nomads
-    if (t !== -1) return type === "Naval" || type === "Lake" ? 100 : 0; // penalty for mainland for navals
     return 0;
   }
 
