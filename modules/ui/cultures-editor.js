@@ -169,7 +169,7 @@ function editCultures() {
 
   function getTypeOptions(type) {
     let options = "";
-    const types = ["Generic", "River", "Lake", "Naval", "Nomadic", "Hunting", "Highland"];
+    const types = ["Human", "Elves", "Gnomes", "Goblins", "Dwarves", "Amphibians", "Dry Reptiles", "Orcs"];
     types.forEach(t => (options += `<option ${type === t ? "selected" : ""} value="${t}">${t}</option>`));
     return options;
   }
