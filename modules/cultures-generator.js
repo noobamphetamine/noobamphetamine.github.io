@@ -113,14 +113,14 @@ window.Cultures = (function () {
 
     // set culture type based on culture center position
     function defineCultureType(i) {
-      if ((cells.biome[i]) == [18] && P(0.6)) || ((cells.biome[i])) == [17, 24] && P(0.4)) || ((cells.biome[i]) == [15, 16, 21, 22, 23] && P(0.2)) || ((cells.biome[i]) == [29, 30, 31, 32, 38] && P(0.1)) return "Elves"; // high penalty in forest biomes and near coastline
-      if ((cells.biome[i]) == [11, 13, 14, 19, 20, 26, 27, 33, 34] && P(0.5)) || ((cells.biome[i]) == [28, 35, 40] && P(0.35)) || ((cells.biome[i]) == [8, 9, 36, 37, 39] && P(0.1)) return "Gnomes"; // no penalty for hills and moutains, high for other elevations
+      if ([18].includes(cells.biome[i]) && P(0.6)) || ([17, 24].includes(cells.biome[i]) && P(0.4)) || ([15, 16, 21, 22, 23].includes(cells.biome[i]) && P(0.2)) || ([29, 30, 31, 32, 38].includes(cells.biome[i]) && P(0.1)) return "Elves"; // high penalty in forest biomes and near coastline
+      if ([11, 13, 14, 19, 20, 26, 27, 33, 34].includes(cells.biome[i]) && P(0.5)) || ([28, 35, 40].includes(cells.biome[i]) && P(0.35)) || ([8, 9, 36, 37, 39].includes(cells.biome[i]) && P(0.1)) return "Gnomes"; // no penalty for hills and moutains, high for other elevations
       const f = pack.features[cells.f[cells.haven[i]]]; // opposite feature
       if (f.cells > 5 && P(.05)) return "Amphibians"; 
       if (f.cells < 5 && P(.05)) return "Dry Reptiles";
-      if ((cells.h[i] > 45) && (cells.biome[i]) == [2, 3, 4, 5, 6, 7, 8, 9, 10] && P(0.7)) || ((cells.h[i] > 45) && (cells.biome[i]) == [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] && P(0.5)) return "Dwarves";
-      if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4))) || ((cells.r[i] && cells.fl[i] > 100) && P(0.6)) return "Goblins"; 
-      if ((cells.biome[i]) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40] && P(0.3)) return "Orcs";
+      if (cells.h[i] > 45) && ([2, 3, 4, 5, 6, 7, 8, 9, 10].includes(cells.biome[i]) && P(0.7)) || (cells.h[i] > 45) && ([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25].includes(cells.biome[i]) && P(0.5)) return "Dwarves";
+      if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4)) || ((cells.r[i] && cells.fl[i] > 100) && P(0.6)) return "Goblins"; 
+      if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40].includes(cells.biome[i]) && P(0.3)) return "Orcs";
       if P(0.05) return "Other";
       return "Humans"; 
     }
