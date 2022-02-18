@@ -75,7 +75,7 @@ window.Cultures = (function () {
       const sorted = [...populated].sort((a, b) => v(b) - v(a)),
         max = Math.floor(sorted.length / 2);
       do {
-        c = sorted[biased(0, max, 5)];
+        c = sorted[biased(0, max, 8)];
         spacing *= 0.9;
       } while (centers.find(cells.p[c][0], cells.p[c][1], spacing) !== undefined);
       return c;
@@ -122,7 +122,7 @@ window.Cultures = (function () {
       if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4)) || ((cells.r[i] && cells.fl[i] > 100) && P(0.6)) return "Goblins"; 
       if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40].includes(cells.biome[i]) && P(0.3)) return "Orcs";
       if P(0.05) return "Other";
-      return "Humans"; 
+      return "Generic"; 
     }
 
     function defineCultureExpansionism(type) {
