@@ -113,11 +113,11 @@ window.Cultures = (function () {
 
     // set culture type based on culture center position
     function defineCultureType(i) {
-      if (([18].includes(cells.biome[i]) && P(0.9)) || ([17, 24].includes(cells.biome[i]) && P(0.75)) || ([15, 16, 21, 22, 23].includes(cells.biome[i]) && P(0.6)) || ([29, 30, 31, 32, 38].includes(cells.biome[i]) && P(0.45))) return "Elves"; // high penalty in forest biomes and near coastline
+      if (([18].includes(cells.biome[i]) && P(0.8)) || ([17, 24].includes(cells.biome[i]) && P(0.7)) || ([15, 16, 21, 22, 23].includes(cells.biome[i]) && P(0.5)) || ([29, 30, 31, 32, 38].includes(cells.biome[i]) && P(0.4))) return "Elves"; // high penalty in forest biomes and near coastline
       if (([11, 13, 14, 19, 20, 26, 27, 33, 34].includes(cells.biome[i]) && P(0.8)) || ([28, 35, 40].includes(cells.biome[i]) && P(0.6)) || ([8, 9, 36, 37, 39].includes(cells.biome[i]) && P(0.45))) return "Gnomes"; // no penalty for hills and moutains, high for other elevations
       const f = pack.features[cells.f[cells.haven[i]]]; // opposite feature
       if (f.cells > 5 && P(.075)) return "Amphibians"; 
-      if (f.cells < 5 && P(.1)) return "Dry Reptiles";
+      if (f.cells < 2 && P(.15)) return "Dry Reptiles";
       if (((cells.h[i] > 45) && P(.9)) || ((cells.h[i] > 30) && (cells.h[i] < 45) && P(0.75))  return "Dwarves";
       if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4)) || ((cells.r[i] && cells.fl[i] > 100) && P(0.6))) return "Goblins"; 
       if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40].includes(cells.biome[i]) && P(0.3)) return "Orcs";
