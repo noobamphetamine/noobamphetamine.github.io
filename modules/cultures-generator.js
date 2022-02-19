@@ -118,7 +118,7 @@ window.Cultures = (function () {
       const f = pack.features[cells.f[cells.haven[i]]]; // opposite feature
       if (f.cells > 5 && P(.075)) return "Amphibians"; 
       if (f.cells < 2 && P(.15)) return "Dry Reptiles";
-      if ((cells.h[i] > 37) && P(.9))  return "Dwarves";
+      if ((cells.h[i] > 37) && P(.9)) return "Dwarves";
       if ((cells.harbor[i] && f.type !== "lake" && P(0.1)) || (cells.harbor[i] === 1 && P(0.6)) || (pack.features[cells.f[i]].group === "isle" && P(0.4)) || ((cells.r[i] && cells.fl[i] > 100) && P(0.6))) return "Goblins"; 
       if ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40].includes(cells.biome[i]) && P(0.3)) return "Orcs";
       if (P(0.05)) return "Other";
