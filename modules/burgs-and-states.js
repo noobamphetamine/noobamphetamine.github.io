@@ -406,7 +406,7 @@ window.BurgsAndStates = (function () {
       if (type === "Naval" && h < 20) return 300; // low sea crossing penalty for Navals
       if (type === "Nomadic" && h < 20) return 10000; // giant sea crossing penalty for Nomads
       if (h < 20) return 1000; // general sea crossing penalty
-      if (type === "Highland" && h < 62) return 1100; // penalty for highlanders on lowlands
+      if (type === "Highland" && h < 45) return 600; // penalty for highlanders on lowlands
       if (type === "Highland") return 0; // no penalty for highlanders on highlands
       if (h >= 67) return 2200; // general mountains crossing penalty
       if (h >= 44) return 300; // general hills crossing penalty
